@@ -47,12 +47,15 @@ export const PreviewPanel = ({
       canvas.width = bgImage.width;
       canvas.height = bgImage.height;
 
+      // Draw background image
       ctx.drawImage(bgImage, 0, 0);
       
+      // Draw text
       ctx.font = `${fontSize}px ${font}`;
       ctx.fillStyle = color;
       ctx.fillText(text, textPosition.x, textPosition.y);
       
+      // Draw foreground image with removed background
       ctx.drawImage(fgImage, 0, 0);
     };
 
@@ -98,12 +101,15 @@ export const PreviewPanel = ({
     <div className="relative bg-white rounded-lg shadow-lg p-4">
       <canvas
         ref={canvasRef}
-        className="max-w-full h-auto"
+        className="max-w-full h-auto cursor-move"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       />
+      <div className="absolute bottom-4 left-4 text-sm text-gray-500">
+        Drag to move text
+      </div>
     </div>
   );
 };
