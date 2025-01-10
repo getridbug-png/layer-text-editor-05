@@ -29,12 +29,20 @@ export const PreviewPanel = ({
     const canvas = canvasRef.current;
     if (!canvas || !originalImage || !processedImage) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
+
+    // Enable image smoothing for better quality
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
 
     const drawImage = async () => {
       const bgImage = new Image();
       const fgImage = new Image();
+
+      // Set image rendering properties for better quality
+      bgImage.setAttribute('rendering', 'crisp-edges');
+      fgImage.setAttribute('rendering', 'crisp-edges');
 
       // Load both images
       bgImage.src = originalImage;
@@ -45,22 +53,24 @@ export const PreviewPanel = ({
         new Promise((resolve) => (fgImage.onload = resolve)),
       ]);
 
-      // Set canvas size to match the original image dimensions
-      canvas.width = bgImage.width;
-      canvas.height = bgImage.height;
+      // Set canvas size to match the original image dimensions exactly
+      canvas.width = bgImage.naturalWidth;
+      canvas.height = bgImage.naturalHeight;
 
       // Clear the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw background image
+      // Draw background image at full resolution
       ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
       
-      // Draw text
+      // Draw text with high quality settings
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
       ctx.font = `${fontSize}px ${font}`;
       ctx.fillStyle = color;
       ctx.fillText(text, textPosition.x, textPosition.y);
       
-      // Draw foreground image (removed background) at the same size and position
+      // Draw foreground image at full resolution
       ctx.drawImage(fgImage, 0, 0, canvas.width, canvas.height);
     };
 
