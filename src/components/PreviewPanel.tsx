@@ -36,6 +36,7 @@ export const PreviewPanel = ({
       const bgImage = new Image();
       const fgImage = new Image();
 
+      // Load both images
       bgImage.src = originalImage;
       fgImage.src = processedImage;
 
@@ -44,19 +45,23 @@ export const PreviewPanel = ({
         new Promise((resolve) => (fgImage.onload = resolve)),
       ]);
 
+      // Set canvas size to match the original image dimensions
       canvas.width = bgImage.width;
       canvas.height = bgImage.height;
 
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       // Draw background image
-      ctx.drawImage(bgImage, 0, 0);
+      ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
       
       // Draw text
       ctx.font = `${fontSize}px ${font}`;
       ctx.fillStyle = color;
       ctx.fillText(text, textPosition.x, textPosition.y);
       
-      // Draw foreground image with removed background
-      ctx.drawImage(fgImage, 0, 0);
+      // Draw foreground image (removed background) at the same size and position
+      ctx.drawImage(fgImage, 0, 0, canvas.width, canvas.height);
     };
 
     drawImage();
