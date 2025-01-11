@@ -27,6 +27,9 @@ export const TextControls = ({
     "Helvetica",
     "Georgia",
     "Verdana",
+    "Roboto",
+    "Open Sans",
+    "Montserrat",
   ];
 
   const handleColorChange = (color: any) => {
@@ -35,25 +38,30 @@ export const TextControls = ({
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg space-y-4">
+    <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
       <div>
-        <Label htmlFor="text">Text</Label>
+        <Label htmlFor="text" className="text-sm font-medium text-gray-700 mb-2">
+          Your Text
+        </Label>
         <Input
           id="text"
           placeholder="Enter your text"
+          className="w-full border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
           onChange={(e) => onTextChange(e.target.value)}
         />
       </div>
 
       <div>
-        <Label htmlFor="font">Font</Label>
+        <Label htmlFor="font" className="text-sm font-medium text-gray-700 mb-2">
+          Font Style
+        </Label>
         <select
           id="font"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
           onChange={(e) => onFontChange(e.target.value)}
         >
           {fonts.map((font) => (
-            <option key={font} value={font}>
+            <option key={font} value={font} style={{ fontFamily: font }}>
               {font}
             </option>
           ))}
@@ -61,20 +69,23 @@ export const TextControls = ({
       </div>
 
       <div>
-        <Label>Font Size</Label>
-        <Slider
-          defaultValue={[24]}
-          max={72}
-          min={12}
-          step={1}
-          onValueChange={(value) => onSizeChange(value[0])}
-        />
+        <Label className="text-sm font-medium text-gray-700 mb-2">Font Size</Label>
+        <div className="px-2">
+          <Slider
+            defaultValue={[24]}
+            max={72}
+            min={12}
+            step={1}
+            className="my-4"
+            onValueChange={(value) => onSizeChange(value[0])}
+          />
+        </div>
       </div>
 
       <div>
-        <Label>Color</Label>
+        <Label className="text-sm font-medium text-gray-700 mb-2">Text Color</Label>
         <div
-          className="w-full h-10 rounded cursor-pointer border"
+          className="w-full h-10 rounded-lg cursor-pointer border border-gray-300 transition-all hover:border-primary"
           style={{ backgroundColor: color }}
           onClick={() => setShowColorPicker(!showColorPicker)}
         />
@@ -87,6 +98,12 @@ export const TextControls = ({
             <ChromePicker color={color} onChange={handleColorChange} />
           </div>
         )}
+      </div>
+
+      <div className="pt-4">
+        <p className="text-sm text-gray-500">
+          Tip: Click and drag the text in the preview to reposition it
+        </p>
       </div>
     </div>
   );

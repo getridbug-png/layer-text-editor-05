@@ -48,113 +48,144 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="container mx-auto py-6">
-          <h1 className="text-3xl font-bold text-primary">Text Behind Image Editor</h1>
-          <p className="text-gray-600 mt-2">Create stunning visuals with text behind objects</p>
+      <header className="bg-white border-b">
+        <div className="container mx-auto py-4 px-4">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Text Behind Photos
+            </h1>
+            <nav className="hidden md:flex space-x-6">
+              <a href="#how-it-works" className="text-gray-600 hover:text-primary transition-colors">
+                How It Works
+              </a>
+              <a href="#examples" className="text-gray-600 hover:text-primary transition-colors">
+                Examples
+              </a>
+            </nav>
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16">
-        <div className="container mx-auto text-center">
-          <motion.h2 
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-accent/5 py-16">
+        <div className="absolute inset-0 bg-grid-white/10" />
+        <div className="relative container mx-auto px-4">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl font-bold text-gray-800 mb-6"
+            className="max-w-3xl mx-auto text-center"
           >
-            Place Text Behind Objects
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
-          >
-            Upload an image, add your text, and our AI will automatically detect and place your text behind the main object.
-          </motion.p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Create Stunning Text Behind Image Effects
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Upload your image, add text, and our AI will automatically place the text behind the subject.
+              Perfect for social media, marketing, and creative projects.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Main Editor Section */}
       <main className="container mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+              {originalImage && processedImage ? (
+                <PreviewPanel
+                  originalImage={originalImage}
+                  processedImage={processedImage}
+                  text={text}
+                  font={font}
+                  fontSize={fontSize}
+                  color={color}
+                  textPosition={textPosition}
+                  onTextPositionChange={setTextPosition}
+                />
+              ) : (
+                <ImageEditor onImageProcess={handleImageProcess} />
+              )}
+            </div>
+            {originalImage && processedImage && (
+              <Button
+                className="w-full bg-primary hover:bg-primary/90 text-white"
+                onClick={handleExport}
+              >
+                Download Image
+              </Button>
+            )}
+          </div>
+          
           <div className="space-y-6">
-            <ImageEditor onImageProcess={handleImageProcess} />
             <TextControls
               onTextChange={setText}
               onFontChange={setFont}
               onSizeChange={setFontSize}
               onColorChange={setColor}
             />
-            {originalImage && processedImage && (
-              <Button
-                className="w-full bg-primary hover:bg-primary/90"
-                onClick={handleExport}
-              >
-                Export Image
-              </Button>
-            )}
-          </div>
-          
-          <div>
-            {originalImage && processedImage ? (
-              <PreviewPanel
-                originalImage={originalImage}
-                processedImage={processedImage}
-                text={text}
-                font={font}
-                fontSize={fontSize}
-                color={color}
-                textPosition={textPosition}
-                onTextPositionChange={setTextPosition}
-              />
-            ) : (
-              <div className="h-full flex items-center justify-center bg-white rounded-lg shadow-lg p-6">
-                <p className="text-gray-500 text-center">
-                  Upload an image to see the preview here
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </main>
 
-      {/* How It Works Section */}
-      <section className="bg-gray-50 py-16">
+      {/* Features Section */}
+      <section id="how-it-works" className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <motion.div 
               whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-lg shadow-lg"
+              className="bg-white p-6 rounded-xl shadow-md"
             >
-              <h3 className="text-xl font-semibold mb-4">1. Upload Image</h3>
-              <p className="text-gray-600">Upload any image with a clear subject. Our AI will automatically detect and process it.</p>
+              <div className="text-primary text-2xl mb-4">1</div>
+              <h3 className="text-xl font-semibold mb-2">Upload Your Image</h3>
+              <p className="text-gray-600">Choose any image with a clear subject. Our AI will automatically detect and process it.</p>
             </motion.div>
             <motion.div 
               whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-lg shadow-lg"
+              className="bg-white p-6 rounded-xl shadow-md"
             >
-              <h3 className="text-xl font-semibold mb-4">2. Add Text</h3>
+              <div className="text-primary text-2xl mb-4">2</div>
+              <h3 className="text-xl font-semibold mb-2">Add Your Text</h3>
               <p className="text-gray-600">Customize your text with different fonts, sizes, and colors. Position it exactly where you want.</p>
             </motion.div>
             <motion.div 
               whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-lg shadow-lg"
+              className="bg-white p-6 rounded-xl shadow-md"
             >
-              <h3 className="text-xl font-semibold mb-4">3. Export</h3>
-              <p className="text-gray-600">Download your creation in high quality, ready to share or use in your projects.</p>
+              <div className="text-primary text-2xl mb-4">3</div>
+              <h3 className="text-xl font-semibold mb-2">Download & Share</h3>
+              <p className="text-gray-600">Export your creation in high quality, ready to share on social media or use in your projects.</p>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="mb-4">Text Behind Image Editor - Create Amazing Visual Content</p>
-          <p className="text-gray-400">© 2024 All rights reserved</p>
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">Text Behind Photos</h3>
+              <p className="text-gray-400">
+                Create stunning visuals by placing text behind objects in your images.
+                Perfect for social media, marketing, and creative projects.
+              </p>
+            </div>
+            <div className="md:text-right">
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <nav className="space-y-2">
+                <a href="#how-it-works" className="block text-gray-400 hover:text-white transition-colors">
+                  How It Works
+                </a>
+                <a href="#examples" className="block text-gray-400 hover:text-white transition-colors">
+                  Examples
+                </a>
+              </nav>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>© 2024 Text Behind Photos. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
