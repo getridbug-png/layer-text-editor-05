@@ -20,6 +20,7 @@ export const TextControls = ({
 }: TextControlsProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [color, setColor] = useState("#000000");
+  const [maxFontSize, setMaxFontSize] = useState(72);
 
   const fonts = [
     "Arial",
@@ -35,6 +36,13 @@ export const TextControls = ({
   const handleColorChange = (color: any) => {
     setColor(color.hex);
     onColorChange(color.hex);
+  };
+
+  const handleMaxFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value >= 12) {
+      setMaxFontSize(value);
+    }
   };
 
   return (
@@ -70,15 +78,30 @@ export const TextControls = ({
 
       <div>
         <Label className="text-sm font-medium text-gray-700 mb-2">Font Size</Label>
-        <div className="px-2">
-          <Slider
-            defaultValue={[24]}
-            max={72}
-            min={12}
-            step={1}
-            className="my-4"
-            onValueChange={(value) => onSizeChange(value[0])}
-          />
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Label htmlFor="maxFontSize" className="text-xs text-gray-500">
+              Max Size:
+            </Label>
+            <Input
+              id="maxFontSize"
+              type="number"
+              min={12}
+              value={maxFontSize}
+              onChange={handleMaxFontSizeChange}
+              className="w-20 h-8 text-sm"
+            />
+          </div>
+          <div className="px-2">
+            <Slider
+              defaultValue={[24]}
+              max={maxFontSize}
+              min={12}
+              step={1}
+              className="my-4"
+              onValueChange={(value) => onSizeChange(value[0])}
+            />
+          </div>
         </div>
       </div>
 
