@@ -73,7 +73,7 @@ export const TextControls = ({
         <div className="px-2">
           <Slider
             defaultValue={[24]}
-            max={100}
+            max={200}
             min={12}
             step={1}
             className="my-4"
