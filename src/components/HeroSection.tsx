@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
+import { Sparkles, Wand2 } from "lucide-react";
 
 export const HeroSection = () => {
   const scrollToEditor = () => {
@@ -26,17 +27,19 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <h1 className="text-6xl md:text-7xl font-bold font-playfair leading-tight">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Sparkles className="w-6 h-6 text-purple-500" />
+              <span className="text-sm font-medium text-purple-500">Powered by AI</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold font-playfair leading-tight">
               <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-                Text-Behind-
+                AI-Powered Text
               </span>
+              <br />
               <span className="bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent">
-                Image
+                Behind Image Magic
               </span>
             </h1>
-            <h2 className="text-5xl md:text-6xl font-bold font-montserrat bg-gradient-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent">
-              Designs Easily
-            </h2>
           </motion.div>
 
           <motion.p
@@ -45,7 +48,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-lato"
           >
-            Create stunning text-behind-image designs in seconds using AI.
+            Transform your photos with our AI-powered text placement technology. Create stunning visuals where text seamlessly integrates behind your subjects.
           </motion.p>
 
           <motion.div
@@ -54,16 +57,28 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-lg md:text-xl text-gray-500 font-light">
-              Unlimited downloads. 100% free. No Ads. No sign-up.
-            </p>
+            <div className="flex flex-wrap gap-4 justify-center items-center">
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full">
+                <Wand2 className="w-5 h-5 text-purple-500" />
+                <span className="text-gray-600">AI Background Detection</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full">
+                <Sparkles className="w-5 h-5 text-pink-500" />
+                <span className="text-gray-600">Smart Text Placement</span>
+              </div>
+            </div>
             
             <Button
               onClick={scrollToEditor}
               className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             >
-              Get Started
+              Try It Now
+              <Wand2 className="ml-2 h-5 w-5" />
             </Button>
+            
+            <p className="text-sm md:text-base text-gray-500 font-light">
+              No sign-up required • Free to use • Instant download
+            </p>
           </motion.div>
         </motion.div>
       </div>

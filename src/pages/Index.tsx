@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
 import { HeroSection } from "@/components/HeroSection";
+import { Wand2 } from "lucide-react";
 
 const Index = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -47,22 +48,34 @@ const Index = () => {
     }
   };
 
+  const scrollToEditor = () => {
+    const editorSection = document.querySelector('#editor-section');
+    editorSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <header className="bg-white border-b">
+      <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto py-4 px-4">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-montserrat">
               Text Behind Photos
             </h1>
-            <nav className="hidden md:flex space-x-6 font-montserrat">
-              <a href="#how-it-works" className="text-gray-600 hover:text-primary transition-colors">
+            <nav className="flex items-center space-x-6 font-montserrat">
+              <a href="#how-it-works" className="text-gray-600 hover:text-primary transition-colors hidden md:block">
                 How It Works
               </a>
-              <a href="#examples" className="text-gray-600 hover:text-primary transition-colors">
-                Examples
+              <a href="#blog" className="text-gray-600 hover:text-primary transition-colors hidden md:block">
+                Blog
               </a>
+              <Button
+                onClick={scrollToEditor}
+                className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-4 py-2 rounded-full"
+              >
+                Get Started
+                <Wand2 className="ml-2 h-4 w-4" />
+              </Button>
             </nav>
           </div>
         </div>
@@ -75,29 +88,33 @@ const Index = () => {
       <main id="editor-section" className="container mx-auto py-12 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            {originalImage && processedImage ? (
-              <>
-                <PreviewPanel
-                  originalImage={originalImage}
-                  processedImage={processedImage}
-                  text={text}
-                  font={font}
-                  fontSize={fontSize}
-                  fontWeight={fontWeight}
-                  color={color}
-                  textPosition={textPosition}
-                  onTextPositionChange={setTextPosition}
-                />
-                <Button
-                  className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white mt-4 py-4 px-8 text-base md:text-lg font-medium"
-                  onClick={handleExport}
-                >
-                  Download Image
-                </Button>
-              </>
-            ) : (
-              <ImageEditor onImageProcess={handleImageProcess} />
-            )}
+            <div className="flex flex-col items-center">
+              {originalImage && processedImage ? (
+                <>
+                  <div className="w-full max-w-3xl mx-auto">
+                    <PreviewPanel
+                      originalImage={originalImage}
+                      processedImage={processedImage}
+                      text={text}
+                      font={font}
+                      fontSize={fontSize}
+                      fontWeight={fontWeight}
+                      color={color}
+                      textPosition={textPosition}
+                      onTextPositionChange={setTextPosition}
+                    />
+                  </div>
+                  <Button
+                    className="mt-6 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-4 text-lg rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    onClick={handleExport}
+                  >
+                    Download Image
+                  </Button>
+                </>
+              ) : (
+                <ImageEditor onImageProcess={handleImageProcess} />
+              )}
+            </div>
           </div>
           
           <div className="space-y-6">
@@ -113,35 +130,83 @@ const Index = () => {
         </div>
       </main>
 
-      {/* Features Section */}
-      <section id="how-it-works" className="bg-gray-50 py-16">
+      {/* How It Works Section */}
+      <section id="how-it-works" className="bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 font-montserrat">How It Works</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+            How It Works
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-xl shadow-md"
+              whileHover={{ y: -10 }}
+              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <div className="text-primary text-2xl mb-4">1</div>
-              <h3 className="text-xl font-semibold mb-2 font-montserrat">Upload Your Image</h3>
-              <p className="text-gray-600 text-sm md:text-base">Choose any image with a clear subject. Our AI will automatically detect and process it.</p>
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl mb-6">1</div>
+              <h3 className="text-2xl font-semibold mb-4 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Upload Your Image</h3>
+              <p className="text-gray-600">Our AI-powered system automatically detects the subject and prepares your image for text placement behind objects.</p>
             </motion.div>
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-xl shadow-md"
+              whileHover={{ y: -10 }}
+              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <div className="text-primary text-2xl mb-4">2</div>
-              <h3 className="text-xl font-semibold mb-2 font-montserrat">Add Your Text</h3>
-              <p className="text-gray-600 text-sm md:text-base">Customize your text with different fonts, sizes, and colors. Position it exactly where you want.</p>
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl mb-6">2</div>
+              <h3 className="text-2xl font-semibold mb-4 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Customize Text</h3>
+              <p className="text-gray-600">Choose from various fonts, sizes, and colors. Position your text exactly where you want it to appear behind the subject.</p>
             </motion.div>
             <motion.div 
-              whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-xl shadow-md"
+              whileHover={{ y: -10 }}
+              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <div className="text-primary text-2xl mb-4">3</div>
-              <h3 className="text-xl font-semibold mb-2 font-montserrat">Download & Share</h3>
-              <p className="text-gray-600 text-sm md:text-base">Export your creation in high quality, ready to share on social media or use in your projects.</p>
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl mb-6">3</div>
+              <h3 className="text-2xl font-semibold mb-4 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Export & Share</h3>
+              <p className="text-gray-600">Download your creation in high quality, ready to share on social media or use in your creative projects.</p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section id="blog" className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+            Latest from Our Blog
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.article 
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            >
+              <div className="h-48 bg-gradient-to-br from-purple-400 to-pink-400"></div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 font-montserrat">AI-Powered Image Processing: The Future of Design</h3>
+                <p className="text-gray-600 mb-4">Discover how artificial intelligence is revolutionizing the way we create and edit images for social media and marketing.</p>
+                <a href="#" className="text-primary hover:text-primary/80 font-medium">Read More →</a>
+              </div>
+            </motion.article>
+            
+            <motion.article 
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            >
+              <div className="h-48 bg-gradient-to-br from-pink-400 to-purple-400"></div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 font-montserrat">Top 10 Creative Ways to Use Text Behind Images</h3>
+                <p className="text-gray-600 mb-4">Explore innovative techniques and creative ideas for incorporating text behind images in your designs.</p>
+                <a href="#" className="text-primary hover:text-primary/80 font-medium">Read More →</a>
+              </div>
+            </motion.article>
+            
+            <motion.article 
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            >
+              <div className="h-48 bg-gradient-to-br from-indigo-400 to-purple-400"></div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 font-montserrat">The Psychology of Text Placement in Visual Design</h3>
+                <p className="text-gray-600 mb-4">Learn how strategic text placement can enhance the impact of your visual content and engage your audience.</p>
+                <a href="#" className="text-primary hover:text-primary/80 font-medium">Read More →</a>
+              </div>
+            </motion.article>
           </div>
         </div>
       </section>
@@ -163,8 +228,8 @@ const Index = () => {
                 <a href="#how-it-works" className="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">
                   How It Works
                 </a>
-                <a href="#examples" className="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">
-                  Examples
+                <a href="#blog" className="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">
+                  Blog
                 </a>
               </nav>
             </div>
