@@ -113,16 +113,16 @@ export const PreviewPanel = ({
   };
 
   return (
-    <div className="relative bg-white rounded-lg shadow-lg p-4">
+    <div className="space-y-4">
       <canvas
         ref={canvasRef}
-        className="max-w-full h-auto cursor-move"
+        className="max-w-full h-auto cursor-move rounded-lg"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       />
-      <div className="absolute bottom-4 left-4 text-sm text-gray-500">
+      <div className="text-sm text-gray-500">
         Drag to move text
       </div>
     </div>

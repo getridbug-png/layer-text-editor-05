@@ -90,8 +90,8 @@ const Index = () => {
       <main className="container mx-auto py-12 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-              {originalImage && processedImage ? (
+            {originalImage && processedImage ? (
+              <>
                 <PreviewPanel
                   originalImage={originalImage}
                   processedImage={processedImage}
@@ -102,17 +102,15 @@ const Index = () => {
                   textPosition={textPosition}
                   onTextPositionChange={setTextPosition}
                 />
-              ) : (
-                <ImageEditor onImageProcess={handleImageProcess} />
-              )}
-            </div>
-            {originalImage && processedImage && (
-              <Button
-                className="w-full bg-primary hover:bg-primary/90 text-white"
-                onClick={handleExport}
-              >
-                Download Image
-              </Button>
+                <Button
+                  className="w-full bg-primary hover:bg-primary/90 text-white mt-4"
+                  onClick={handleExport}
+                >
+                  Download Image
+                </Button>
+              </>
+            ) : (
+              <ImageEditor onImageProcess={handleImageProcess} />
             )}
           </div>
           
