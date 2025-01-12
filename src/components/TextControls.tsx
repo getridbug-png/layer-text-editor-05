@@ -4,6 +4,7 @@ import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
 import { Button } from "./ui/button";
 import { ChromePicker } from "react-color";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface TextControlsProps {
   onTextChange: (text: string) => void;
@@ -20,16 +21,18 @@ export const TextControls = ({
 }: TextControlsProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [color, setColor] = useState("#000000");
+  const [previewText, setPreviewText] = useState("Preview Text");
 
   const fonts = [
-    "Arial",
-    "Times New Roman",
-    "Helvetica",
-    "Georgia",
-    "Verdana",
-    "Roboto",
-    "Open Sans",
-    "Montserrat",
+    "Abril Fatface", "Alegreya", "Archivo", "Bitter", "Cabin",
+    "Crimson Text", "Dancing Script", "DM Sans", "Fira Sans",
+    "IBM Plex Sans", "Inter", "Josefin Sans", "Lato",
+    "Libre Baskerville", "Lora", "Merriweather", "Montserrat",
+    "Mulish", "Noto Sans", "Nunito", "Open Sans", "Oswald",
+    "PT Sans", "PT Serif", "Playfair Display", "Poppins",
+    "Quicksand", "Raleway", "Roboto", "Roboto Condensed",
+    "Roboto Mono", "Roboto Slab", "Source Sans Pro",
+    "Source Serif Pro", "Space Grotesk", "Ubuntu", "Work Sans"
   ];
 
   const handleColorChange = (color: any) => {
@@ -47,7 +50,10 @@ export const TextControls = ({
           id="text"
           placeholder="Enter your text"
           className="w-full border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-          onChange={(e) => onTextChange(e.target.value)}
+          onChange={(e) => {
+            onTextChange(e.target.value);
+            setPreviewText(e.target.value || "Preview Text");
+          }}
         />
       </div>
 
@@ -55,17 +61,22 @@ export const TextControls = ({
         <Label htmlFor="font" className="text-sm font-medium text-gray-700 mb-2">
           Font Style
         </Label>
-        <select
-          id="font"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-          onChange={(e) => onFontChange(e.target.value)}
-        >
-          {fonts.map((font) => (
-            <option key={font} value={font} style={{ fontFamily: font }}>
-              {font}
-            </option>
-          ))}
-        </select>
+        <ScrollArea className="h-48 rounded-md border">
+          <div className="p-4">
+            {fonts.map((font) => (
+              <div
+                key={font}
+                onClick={() => onFontChange(font)}
+                className="p-2 hover:bg-gray-100 cursor-pointer rounded-md transition-colors"
+              >
+                <p style={{ fontFamily: font }} className="text-lg">
+                  {previewText}
+                </p>
+                <p className="text-xs text-gray-500 mt-1">{font}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
       </div>
 
       <div>

@@ -67,27 +67,10 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-accent/5 py-16">
-        <div className="absolute inset-0 bg-grid-white/10" />
-        <div className="relative container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Create Stunning Text Behind Image Effects
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Upload your image, add text, and our AI will automatically place the text behind the subject.
-              Perfect for social media, marketing, and creative projects.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Main Editor Section */}
-      <main className="container mx-auto py-12 px-4">
+      <main id="editor-section" className="container mx-auto py-12 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             {originalImage && processedImage ? (
@@ -103,7 +86,7 @@ const Index = () => {
                   onTextPositionChange={setTextPosition}
                 />
                 <Button
-                  className="w-full bg-primary hover:bg-primary/90 text-white mt-4"
+                  className="w-full bg-primary hover:bg-primary/90 text-white mt-4 py-6 text-lg font-medium"
                   onClick={handleExport}
                 >
                   Download Image
