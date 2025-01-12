@@ -6,6 +6,7 @@ interface PreviewPanelProps {
   text: string;
   font: string;
   fontSize: number;
+  fontWeight: number;
   color: string;
   textPosition: { x: number; y: number };
   onTextPositionChange: (position: { x: number; y: number }) => void;
@@ -17,6 +18,7 @@ export const PreviewPanel = ({
   text,
   font,
   fontSize,
+  fontWeight,
   color,
   textPosition,
   onTextPositionChange,
@@ -32,7 +34,6 @@ export const PreviewPanel = ({
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    // Enable image smoothing for better quality
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
@@ -40,11 +41,9 @@ export const PreviewPanel = ({
       const bgImage = new Image();
       const fgImage = new Image();
 
-      // Set image rendering properties for better quality
       bgImage.setAttribute('rendering', 'crisp-edges');
       fgImage.setAttribute('rendering', 'crisp-edges');
 
-      // Load both images
       bgImage.src = originalImage;
       fgImage.src = processedImage;
 
@@ -53,29 +52,23 @@ export const PreviewPanel = ({
         new Promise((resolve) => (fgImage.onload = resolve)),
       ]);
 
-      // Set canvas size to match the original image dimensions exactly
       canvas.width = bgImage.naturalWidth;
       canvas.height = bgImage.naturalHeight;
 
-      // Clear the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw background image at full resolution
       ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
       
-      // Draw text with high quality settings
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'left';
-      ctx.font = `${fontSize}px ${font}`;
+      ctx.font = `${fontWeight} ${fontSize}px ${font}`;
       ctx.fillStyle = color;
       ctx.fillText(text, textPosition.x, textPosition.y);
       
-      // Draw foreground image at full resolution
       ctx.drawImage(fgImage, 0, 0, canvas.width, canvas.height);
     };
 
     drawImage();
-  }, [originalImage, processedImage, text, font, fontSize, color, textPosition]);
+  }, [originalImage, processedImage, text, font, fontSize, fontWeight, color, textPosition]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;

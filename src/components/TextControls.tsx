@@ -11,6 +11,8 @@ interface TextControlsProps {
   onFontChange: (font: string) => void;
   onSizeChange: (size: number) => void;
   onColorChange: (color: string) => void;
+  onFontWeightChange?: (weight: number) => void;
+  show: boolean;
 }
 
 export const TextControls = ({
@@ -18,10 +20,11 @@ export const TextControls = ({
   onFontChange,
   onSizeChange,
   onColorChange,
+  onFontWeightChange = () => {},
+  show
 }: TextControlsProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [color, setColor] = useState("#000000");
-  const [previewText, setPreviewText] = useState("Preview Text");
 
   const fonts = [
     "Abril Fatface", "Alegreya", "Archivo", "Bitter", "Cabin",
@@ -34,6 +37,8 @@ export const TextControls = ({
     "Roboto Mono", "Roboto Slab", "Source Sans Pro",
     "Source Serif Pro", "Space Grotesk", "Ubuntu", "Work Sans"
   ];
+
+  if (!show) return null;
 
   const handleColorChange = (color: any) => {
     setColor(color.hex);
@@ -50,10 +55,7 @@ export const TextControls = ({
           id="text"
           placeholder="Enter your text"
           className="w-full border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-          onChange={(e) => {
-            onTextChange(e.target.value);
-            setPreviewText(e.target.value || "Preview Text");
-          }}
+          onChange={(e) => onTextChange(e.target.value)}
         />
       </div>
 
@@ -70,9 +72,8 @@ export const TextControls = ({
                 className="p-2 hover:bg-gray-100 cursor-pointer rounded-md transition-colors"
               >
                 <p style={{ fontFamily: font }} className="text-lg">
-                  {previewText}
+                  {font}
                 </p>
-                <p className="text-xs text-gray-500 mt-1">{font}</p>
               </div>
             ))}
           </div>
@@ -94,6 +95,20 @@ export const TextControls = ({
       </div>
 
       <div>
+        <Label className="text-sm font-medium text-gray-700 mb-2">Font Weight</Label>
+        <div className="px-2">
+          <Slider
+            defaultValue={[400]}
+            max={900}
+            min={100}
+            step={100}
+            className="my-4"
+            onValueChange={(value) => onFontWeightChange(value[0])}
+          />
+        </div>
+      </div>
+
+      <div>
         <Label className="text-sm font-medium text-gray-700 mb-2">Text Color</Label>
         <div
           className="w-full h-10 rounded-lg cursor-pointer border border-gray-300 transition-all hover:border-primary"
@@ -109,12 +124,6 @@ export const TextControls = ({
             <ChromePicker color={color} onChange={handleColorChange} />
           </div>
         )}
-      </div>
-
-      <div className="pt-4">
-        <p className="text-sm text-gray-500">
-          Tip: Click and drag the text in the preview to reposition it
-        </p>
       </div>
     </div>
   );
