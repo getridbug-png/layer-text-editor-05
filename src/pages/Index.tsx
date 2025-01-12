@@ -5,6 +5,7 @@ import { PreviewPanel } from "@/components/PreviewPanel";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
+import { HeroSection } from "@/components/HeroSection";
 
 const Index = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
