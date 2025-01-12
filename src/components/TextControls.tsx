@@ -4,7 +4,7 @@ import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
 import { Button } from "./ui/button";
 import { ChromePicker } from "react-color";
-import { ScrollArea } from "./ui/scroll-area";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 interface TextControlsProps {
   onTextChange: (text: string) => void;
@@ -59,29 +59,30 @@ export const TextControls = ({
         />
       </div>
 
-      <div>
-        <Label htmlFor="font" className="text-sm font-medium text-gray-700 mb-2">
+      <div className="space-y-2">
+        <Label htmlFor="font" className="text-sm font-medium text-gray-700">
           Font Style
         </Label>
-        <ScrollArea className="h-48 rounded-md border">
-          <div className="p-4">
+        <Select onValueChange={onFontChange}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select a font" />
+          </SelectTrigger>
+          <SelectContent>
             {fonts.map((font) => (
-              <div
+              <SelectItem
                 key={font}
-                onClick={() => onFontChange(font)}
-                className="p-2 hover:bg-gray-100 cursor-pointer rounded-md transition-colors"
+                value={font}
+                style={{ fontFamily: font }}
               >
-                <p style={{ fontFamily: font }} className="text-lg">
-                  {font}
-                </p>
-              </div>
+                {font}
+              </SelectItem>
             ))}
-          </div>
-        </ScrollArea>
+          </SelectContent>
+        </Select>
       </div>
 
-      <div>
-        <Label className="text-sm font-medium text-gray-700 mb-2">Font Size</Label>
+      <div className="space-y-4">
+        <Label className="text-sm font-medium text-gray-700">Font Size</Label>
         <div className="px-2">
           <Slider
             defaultValue={[24]}
@@ -90,12 +91,18 @@ export const TextControls = ({
             step={1}
             className="my-4"
             onValueChange={(value) => onSizeChange(value[0])}
+            style={{
+              "--slider-track-background": "linear-gradient(to right, #6366F1, #EC4899)",
+              "--slider-range-background": "#6366F1",
+              "--slider-thumb-background": "#ffffff",
+              "--slider-thumb-border": "2px solid #6366F1",
+            } as React.CSSProperties}
           />
         </div>
       </div>
 
-      <div>
-        <Label className="text-sm font-medium text-gray-700 mb-2">Font Weight</Label>
+      <div className="space-y-4">
+        <Label className="text-sm font-medium text-gray-700">Font Weight</Label>
         <div className="px-2">
           <Slider
             defaultValue={[400]}
@@ -104,6 +111,12 @@ export const TextControls = ({
             step={100}
             className="my-4"
             onValueChange={(value) => onFontWeightChange(value[0])}
+            style={{
+              "--slider-track-background": "linear-gradient(to right, #6366F1, #EC4899)",
+              "--slider-range-background": "#6366F1",
+              "--slider-thumb-background": "#ffffff",
+              "--slider-thumb-border": "2px solid #6366F1",
+            } as React.CSSProperties}
           />
         </div>
       </div>
