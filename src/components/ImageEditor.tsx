@@ -45,7 +45,7 @@ export const ImageEditor = ({ onImageProcess }: ImageEditorProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-[800px]"> {/* Increased width by 200px from the default 600px */}
       <div
         className="min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-8 cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
         onClick={() => fileInputRef.current?.click()}
