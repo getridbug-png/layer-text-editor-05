@@ -7,6 +7,71 @@ import { useToast } from "@/components/ui/use-toast";
 import { motion } from "framer-motion";
 import { HeroSection } from "@/components/HeroSection";
 import { Wand2 } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"; // Import social media icons
+
+const ExampleGallery = () => {
+  const examples = [
+    {
+      image: "/lovable-uploads/93ba5eb2-01dc-419f-9634-453b7bc78e5d.png",
+      title: "Desert View",
+      description: "Text overlaying desert landscape"
+    },
+    {
+      image: "/lovable-uploads/5ceadf85-70d7-4644-967a-9aee098b27f0.png",
+      title: "Motivational",
+      description: "Inspiring text with silhouette"
+    },
+    {
+      image: "/lovable-uploads/55c4a985-241b-4b38-a132-315fc08817b4.png",
+      title: "Nature Text",
+      description: "Text integration with landscape"
+    },
+    {
+      image: "/lovable-uploads/452c938f-4cf1-4dff-86ed-f86ba179f025.png",
+      title: "Mountain Text",
+      description: "Text overlay on mountain peaks"
+    }
+  ];
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-4">
+      {examples.map((example, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.2 }}
+          className="relative group"
+          whileHover={{ scale: 1.05, zIndex: 20 }}
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: 'perspective(1000px)'
+          }}
+        >
+          <div 
+            className="relative overflow-hidden rounded-xl shadow-xl"
+            style={{
+              transform: 'translateZ(20px)',
+              transition: 'transform 0.3s ease-out'
+            }}
+          >
+            <img
+              src={example.image}
+              alt={example.title}
+              className="w-full h-[300px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
+              <div className="absolute bottom-0 p-6">
+                <h3 className="text-white text-xl font-bold mb-2">{example.title}</h3>
+                <p className="text-white/80">{example.description}</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
 
 const Index = () => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -55,11 +120,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Header */}
+      {/* Header with GeistSans font */}
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto py-4 px-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-montserrat">
+            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-geist">
               Text Behind Photos
             </h1>
             <nav className="flex items-center space-x-6 font-montserrat">
@@ -165,6 +230,19 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Examples Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-geist text-white">
+            Examples of Text Behind Images
+          </h2>
+          <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
+            Explore our gallery of creative text-behind-image designs. Get inspired by these examples and create your own unique compositions.
+          </p>
+          <ExampleGallery />
+        </div>
+      </section>
+
       {/* Blog Section */}
       <section id="blog" className="py-20">
         <div className="container mx-auto px-4">
@@ -211,30 +289,53 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer with Social Media Cards */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 font-montserrat">Text Behind Photos</h3>
-              <p className="text-gray-400 text-sm md:text-base">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 font-geist">Text Behind Photos</h3>
+              <p className="text-gray-400">
                 Create stunning visuals by placing text behind objects in your images.
                 Perfect for social media, marketing, and creative projects.
               </p>
             </div>
-            <div className="md:text-right">
-              <h4 className="text-lg font-semibold mb-4 font-montserrat">Quick Links</h4>
-              <nav className="space-y-2">
-                <a href="#how-it-works" className="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">
-                  How It Works
-                </a>
-                <a href="#blog" className="block text-gray-400 hover:text-white transition-colors text-sm md:text-base">
-                  Blog
-                </a>
-              </nav>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.05 }}
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+              >
+                <Facebook className="w-6 h-6 mb-2" />
+                <span className="text-sm">Facebook</span>
+              </motion.a>
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.05 }}
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+              >
+                <Twitter className="w-6 h-6 mb-2" />
+                <span className="text-sm">Twitter</span>
+              </motion.a>
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.05 }}
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+              >
+                <Instagram className="w-6 h-6 mb-2" />
+                <span className="text-sm">Instagram</span>
+              </motion.a>
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.05 }}
+                className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
+              >
+                <Linkedin className="w-6 h-6 mb-2" />
+                <span className="text-sm">LinkedIn</span>
+              </motion.a>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm md:text-base font-montserrat">
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
             <p>© 2024 Text Behind Photos. All rights reserved.</p>
           </div>
         </div>

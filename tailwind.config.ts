@@ -87,6 +87,7 @@ export default {
         'space': ['"Space Grotesk"', 'sans-serif'],
         'ubuntu': ['Ubuntu', 'sans-serif'],
         'work': ['"Work Sans"', 'sans-serif'],
+        'geist': ['GeistSans', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
