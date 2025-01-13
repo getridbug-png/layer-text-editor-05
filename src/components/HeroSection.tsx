@@ -29,9 +29,9 @@ export const HeroSection = () => {
           >
             <div className="flex items-center justify-center gap-2 mb-4">
               <Sparkles className="w-6 h-6 text-purple-500" />
-              <span className="text-sm font-medium text-purple-500">Powered by AI</span>
+              <span className="text-sm font-medium text-purple-500 font-space">Powered by AI</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold font-playfair leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold font-abril leading-tight">
               <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                 AI-Powered Text
               </span>
@@ -46,7 +46,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-lato"
+            className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-quicksand"
           >
             Transform your photos with our AI-powered text placement technology. Create stunning visuals where text seamlessly integrates behind your subjects.
           </motion.p>
@@ -60,23 +60,23 @@ export const HeroSection = () => {
             <div className="flex flex-wrap gap-4 justify-center items-center">
               <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full">
                 <Wand2 className="w-5 h-5 text-purple-500" />
-                <span className="text-gray-600">AI Background Detection</span>
+                <span className="text-gray-600 font-space">AI Background Detection</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full">
                 <Sparkles className="w-5 h-5 text-pink-500" />
-                <span className="text-gray-600">Smart Text Placement</span>
+                <span className="text-gray-600 font-space">Smart Text Placement</span>
               </div>
             </div>
             
             <Button
               onClick={scrollToEditor}
-              className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-6 text-lg rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl font-space"
             >
               Try It Now
               <Wand2 className="ml-2 h-5 w-5" />
             </Button>
             
-            <p className="text-sm md:text-base text-gray-500 font-light">
+            <p className="text-sm md:text-base text-gray-500 font-light font-space">
               No sign-up required • Free to use • Instant download
             </p>
           </motion.div>

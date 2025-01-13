@@ -196,35 +196,55 @@ const Index = () => {
       </main>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 py-20">
+      <section id="how-it-works" className="bg-gradient-to-br from-[#F1F0FB] via-[#D3E4FD] to-[#E5DEFF] py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-abril bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <motion.div 
-              whileHover={{ y: -10 }}
-              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20"
             >
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl mb-6">1</div>
-              <h3 className="text-2xl font-semibold mb-4 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Upload Your Image</h3>
-              <p className="text-gray-600">Our AI-powered system automatically detects the subject and prepares your image for text placement behind objects.</p>
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                <span className="font-space">1</span>
+              </div>
+              <h3 className="text-2xl font-semibold mb-4 font-quicksand bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                Upload Your Image
+              </h3>
+              <p className="text-gray-600 font-space">
+                Our AI-powered system automatically detects the subject and prepares your image for text placement behind objects.
+              </p>
             </motion.div>
+            
             <motion.div 
-              whileHover={{ y: -10 }}
-              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20"
             >
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl mb-6">2</div>
-              <h3 className="text-2xl font-semibold mb-4 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Customize Text</h3>
-              <p className="text-gray-600">Choose from various fonts, sizes, and colors. Position your text exactly where you want it to appear behind the subject.</p>
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                <span className="font-space">2</span>
+              </div>
+              <h3 className="text-2xl font-semibold mb-4 font-quicksand bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                Customize Text
+              </h3>
+              <p className="text-gray-600 font-space">
+                Choose from various fonts, sizes, and colors. Position your text exactly where you want it to appear behind the subject.
+              </p>
             </motion.div>
+            
             <motion.div 
-              whileHover={{ y: -10 }}
-              className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300"
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20"
             >
-              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl mb-6">3</div>
-              <h3 className="text-2xl font-semibold mb-4 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Export & Share</h3>
-              <p className="text-gray-600">Download your creation in high quality, ready to share on social media or use in your creative projects.</p>
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                <span className="font-space">3</span>
+              </div>
+              <h3 className="text-2xl font-semibold mb-4 font-quicksand bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                Export & Share
+              </h3>
+              <p className="text-gray-600 font-space">
+                Download your creation in high quality, ready to share on social media or use in your creative projects.
+              </p>
             </motion.div>
           </div>
         </div>
