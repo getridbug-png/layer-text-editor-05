@@ -355,8 +355,13 @@ const Index = () => {
               </motion.a>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row md:justify-between items-center text-gray-400 text-sm">
             <p>© 2024 Text Behind Photos. All rights reserved.</p>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Disclaimer</a>
+              <a href="#" className="hover:text-white transition-colors">Contact</a>
+            </div>
           </div>
         </div>
       </footer>
