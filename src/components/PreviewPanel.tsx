@@ -82,9 +82,9 @@ export const PreviewPanel = ({
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
+    if (!isDragging.current || !canvasRef.current) return;
 
-    const rect = canvasRef.current?.getBoundingClientRect();
+    const rect = canvasRef.current.getBoundingClientRect();
     if (rect) {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -92,10 +92,25 @@ export const PreviewPanel = ({
       const dx = x - lastPosition.current.x;
       const dy = y - lastPosition.current.y;
 
-      onTextPositionChange({
-        x: textPosition.x + dx,
-        y: textPosition.y + dy,
-      });
+      // Calculate new position
+      const newX = textPosition.x + dx;
+      const newY = textPosition.y + dy;
+
+      // Get canvas context for text measurements
+      const ctx = canvasRef.current.getContext('2d');
+      if (ctx) {
+        ctx.font = `${fontWeight} ${fontSize}px ${font}`;
+        const textWidth = ctx.measureText(text).width;
+
+        // Constrain text position within canvas boundaries
+        const constrainedX = Math.max(0, Math.min(newX, canvasRef.current.width - textWidth));
+        const constrainedY = Math.max(fontSize / 2, Math.min(newY, canvasRef.current.height - fontSize / 2));
+
+        onTextPositionChange({
+          x: constrainedX,
+          y: constrainedY,
+        });
+      }
 
       lastPosition.current = { x, y };
     }
@@ -106,10 +121,10 @@ export const PreviewPanel = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col items-center justify-center space-y-4 w-full">
       <canvas
         ref={canvasRef}
-        className="max-w-full h-auto cursor-move rounded-lg"
+        className="max-w-full h-auto cursor-move rounded-lg shadow-lg"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
