@@ -70,27 +70,27 @@ export const PreviewPanel = ({
     drawImage();
   }, [originalImage, processedImage, text, font, fontSize, fontWeight, color, textPosition]);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleStart = (x: number, y: number) => {
     isDragging.current = true;
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect) {
       lastPosition.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
+        x: x - rect.left,
+        y: y - rect.top,
       };
     }
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMove = (x: number, y: number) => {
     if (!isDragging.current || !canvasRef.current) return;
 
     const rect = canvasRef.current.getBoundingClientRect();
     if (rect) {
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const currentX = x - rect.left;
+      const currentY = y - rect.top;
       
-      const dx = x - lastPosition.current.x;
-      const dy = y - lastPosition.current.y;
+      const dx = currentX - lastPosition.current.x;
+      const dy = currentY - lastPosition.current.y;
 
       // Calculate new position
       const newX = textPosition.x + dx;
@@ -112,26 +112,59 @@ export const PreviewPanel = ({
         });
       }
 
-      lastPosition.current = { x, y };
+      lastPosition.current = { x: currentX, y: currentY };
     }
   };
 
-  const handleMouseUp = () => {
+  const handleEnd = () => {
     isDragging.current = false;
+  };
+
+  // Mouse event handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    handleStart(e.clientX, e.clientY);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    handleMove(e.clientX, e.clientY);
+  };
+
+  const handleMouseUp = () => {
+    handleEnd();
+  };
+
+  // Touch event handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault(); // Prevent scrolling while dragging
+    const touch = e.touches[0];
+    handleStart(touch.clientX, touch.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault(); // Prevent scrolling while dragging
+    const touch = e.touches[0];
+    handleMove(touch.clientX, touch.clientY);
+  };
+
+  const handleTouchEnd = () => {
+    handleEnd();
   };
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4 w-full">
       <canvas
         ref={canvasRef}
-        className="max-w-full h-auto cursor-move rounded-lg shadow-lg"
+        className="max-w-full h-auto cursor-move rounded-lg shadow-lg touch-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       />
       <div className="text-sm text-gray-500">
-        Drag to move text
+        Drag or touch to move text
       </div>
     </div>
   );
