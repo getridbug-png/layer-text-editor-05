@@ -151,40 +151,38 @@ const Index = () => {
 
       {/* Main Editor Section */}
       <main id="editor-section" className="container mx-auto py-12 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* In mobile, this div takes full width and appears first */}
-          <div className="lg:col-span-2 order-1 lg:order-1">
+        <div className={`grid grid-cols-1 ${originalImage ? 'lg:grid-cols-2' : ''} gap-8`}>
+          {/* Image preview section */}
+          <div className={`${originalImage ? 'lg:col-span-1' : 'lg:col-span-2'} order-1 lg:order-1`}>
             <div className="flex flex-col items-center">
               {originalImage && processedImage ? (
-                <>
-                  <div className="w-full max-w-3xl mx-auto">
-                    <PreviewPanel
-                      originalImage={originalImage}
-                      processedImage={processedImage}
-                      text={text}
-                      font={font}
-                      fontSize={fontSize}
-                      fontWeight={fontWeight}
-                      color={color}
-                      textPosition={textPosition}
-                      onTextPositionChange={setTextPosition}
-                    />
-                  </div>
+                <div className="w-full">
+                  <PreviewPanel
+                    originalImage={originalImage}
+                    processedImage={processedImage}
+                    text={text}
+                    font={font}
+                    fontSize={fontSize}
+                    fontWeight={fontWeight}
+                    color={color}
+                    textPosition={textPosition}
+                    onTextPositionChange={setTextPosition}
+                  />
                   <Button
                     className="mt-6 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-4 text-lg rounded-full transform transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                     onClick={handleExport}
                   >
                     Download Image
                   </Button>
-                </>
+                </div>
               ) : (
                 <ImageEditor onImageProcess={handleImageProcess} />
               )}
             </div>
           </div>
           
-          {/* Controls appear below the preview on mobile */}
-          <div className="space-y-6 order-2 lg:order-2">
+          {/* Controls section */}
+          <div className={`space-y-6 order-2 lg:order-2 ${!originalImage && 'hidden lg:hidden'}`}>
             <TextControls
               onTextChange={setText}
               onFontChange={setFont}
