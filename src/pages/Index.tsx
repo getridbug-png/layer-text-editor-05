@@ -120,7 +120,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Header with GeistSans font */}
+      {/* Header */}
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto py-4 px-4">
           <div className="flex items-center justify-between">
@@ -152,7 +152,8 @@ const Index = () => {
       {/* Main Editor Section */}
       <main id="editor-section" className="container mx-auto py-12 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+          {/* In mobile, this div takes full width and appears first */}
+          <div className="lg:col-span-2 order-1 lg:order-1">
             <div className="flex flex-col items-center">
               {originalImage && processedImage ? (
                 <>
@@ -182,7 +183,8 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="space-y-6">
+          {/* Controls appear below the preview on mobile */}
+          <div className="space-y-6 order-2 lg:order-2">
             <TextControls
               onTextChange={setText}
               onFontChange={setFont}
@@ -309,7 +311,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer with Social Media Cards */}
+      {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 mb-8">
