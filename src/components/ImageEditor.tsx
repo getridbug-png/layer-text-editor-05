@@ -45,9 +45,9 @@ export const ImageEditor = ({ onImageProcess }: ImageEditorProps) => {
   };
 
   return (
-    <div className="relative w-[800px]"> {/* Increased width by 200px from the default 600px */}
+    <div className="w-full max-w-[800px] mx-auto px-4 sm:px-6"> {/* Updated for better mobile responsiveness */}
       <div
-        className="min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-8 cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
+        className="min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-4 sm:p-8 cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
         onClick={() => fileInputRef.current?.click()}
       >
         <input
@@ -63,7 +63,7 @@ export const ImageEditor = ({ onImageProcess }: ImageEditorProps) => {
             <p className="text-gray-600">Processing your image...</p>
           </div>
         ) : uploadedImage ? (
-          <img src={uploadedImage} alt="Uploaded" className="max-h-[400px] object-contain rounded-lg" />
+          <img src={uploadedImage} alt="Uploaded" className="max-h-[400px] w-full object-contain rounded-lg" />
         ) : (
           <div className="text-center">
             <div className="text-primary mb-4">
