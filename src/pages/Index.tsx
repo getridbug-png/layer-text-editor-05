@@ -254,7 +254,7 @@ const Index = () => {
       <section className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-abril font-bold text-center mb-12 text-white">
-            Kaushik Pithiya
+            Kaushik Pithiya Ahir
           </h2>
           <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
             Explore our gallery of creative text-behind-image designs. Get inspired by these examples and create your own unique compositions.
