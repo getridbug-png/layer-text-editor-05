@@ -25,7 +25,7 @@ export const PreviewPanel = ({
 }: PreviewPanelProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
-  const lastPosition = useRef({ x: 0, y: 0 });
+  const lastPosition = useRef({ x: textPosition.x, y: textPosition.y });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -41,8 +41,7 @@ export const PreviewPanel = ({
       const bgImage = new Image();
       const fgImage = new Image();
 
-      bgImage.setAttribute('rendering', 'crisp-edges');
-      fgImage.setAttribute('rendering', 'crisp-edges');
+      bgImage.setAttribute('rendering', 'crisp-edges');setAttribute('rendering', 'crisp-edges');
 
       bgImage.src = originalImage;
       fgImage.src = processedImage;
@@ -74,10 +73,9 @@ export const PreviewPanel = ({
     isDragging.current = true;
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect) {
-      lastPosition.current = {
-        x: x - rect.left,
-        y: y - rect.top,
-      };
+      const currentX = x - rect.left;
+      const currentY = y - rect.top;
+      lastPosition.current = { x: currentX, y: currentY };
     }
   };
 
@@ -89,9 +87,12 @@ export const PreviewPanel = ({
       const currentX = x - rect.left;
       const currentY = y - rect.top;
 
-      // Calculate new position directly from touch/mouse position
-      const newX = currentX;
-      const newY = currentY;
+      const dx = currentX - lastPosition.current.x;
+      const dy = currentY - lastPosition.current.y;
+
+      // Calculate new position based on the delta from last position
+      const newX = textPosition.x + dx;
+      const newY = textPosition.y + dy;
 
       // Get canvas context for text measurements
       const ctx = canvasRef.current.getContext('2d');
