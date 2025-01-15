@@ -88,13 +88,10 @@ export const PreviewPanel = ({
     if (rect) {
       const currentX = x - rect.left;
       const currentY = y - rect.top;
-      
-      const dx = currentX - lastPosition.current.x;
-      const dy = currentY - lastPosition.current.y;
 
-      // Calculate new position
-      const newX = textPosition.x + dx;
-      const newY = textPosition.y + dy;
+      // Calculate new position directly from touch/mouse position
+      const newX = currentX;
+      const newY = currentY;
 
       // Get canvas context for text measurements
       const ctx = canvasRef.current.getContext('2d');
@@ -133,15 +130,15 @@ export const PreviewPanel = ({
     handleEnd();
   };
 
-  // Touch event handlers
+  // Touch event handlers with improved responsiveness
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault(); // Prevent scrolling while dragging
+    e.preventDefault();
     const touch = e.touches[0];
     handleStart(touch.clientX, touch.clientY);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault(); // Prevent scrolling while dragging
+    e.preventDefault();
     const touch = e.touches[0];
     handleMove(touch.clientX, touch.clientY);
   };
