@@ -327,7 +327,7 @@ const Index = () => {
                 className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
               >
                 <Facebook className="w-6 h-6 mb-2" />
-                <span className="text-sm">Facebook</span>
+                <span className="text-sm"><a href="https://www.facebook.com/textbehindimageai/">Facebook</a></span>
               </motion.a>
               <motion.a
                 href="#"
@@ -335,7 +335,7 @@ const Index = () => {
                 className="flex flex-col items-center justify-center p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors"
               >
                 <Twitter className="w-6 h-6 mb-2" />
-                <span className="text-sm">Twitter</span>
+                <span className="text-sm"><a href="https://x.com/textbimage">Twitter</a></span>
               </motion.a>
               <motion.a
                 href="#"
