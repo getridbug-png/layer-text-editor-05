@@ -78,10 +78,10 @@ const Index = () => {
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [text, setText] = useState("Your Text Here");
   const [font, setFont] = useState("Arial");
-  const [fontSize, setFontSize] = useState(40);
+  const [fontSize, setFontSize] = useState(50);
   const [fontWeight, setFontWeight] = useState(400);
   const [color, setColor] = useState("#FF5733");
-  const [textPosition, setTextPosition] = useState({ x: 300, y: 250 });
+  const [textPosition, setTextPosition] = useState({ x: 250, y: 150 });
   const { toast } = useToast();
 
   const handleImageProcess = (original: string, processed: string) => {
