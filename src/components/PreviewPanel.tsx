@@ -25,7 +25,7 @@ export const PreviewPanel = ({
 }: PreviewPanelProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDragging = useRef(false);
-  const lastPosition = useRef({ x: textPosition.x, y: textPosition.y });
+  const lastPosition = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -74,9 +74,10 @@ export const PreviewPanel = ({
     isDragging.current = true;
     const rect = canvasRef.current?.getBoundingClientRect();
     if (rect) {
-      const currentX = x - rect.left;
-      const currentY = y - rect.top;
-      lastPosition.current = { x: currentX, y: currentY };
+      lastPosition.current = {
+        x: x - rect.left,
+        y: y - rect.top,
+      };
     }
   };
 
@@ -87,11 +88,11 @@ export const PreviewPanel = ({
     if (rect) {
       const currentX = x - rect.left;
       const currentY = y - rect.top;
-
+      
       const dx = currentX - lastPosition.current.x;
       const dy = currentY - lastPosition.current.y;
 
-      // Calculate new position based on the delta from last position
+      // Calculate new position
       const newX = textPosition.x + dx;
       const newY = textPosition.y + dy;
 
@@ -132,15 +133,15 @@ export const PreviewPanel = ({
     handleEnd();
   };
 
-  // Touch event handlers with improved responsiveness
+  // Touch event handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent scrolling while dragging
     const touch = e.touches[0];
     handleStart(touch.clientX, touch.clientY);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent scrolling while dragging
     const touch = e.touches[0];
     handleMove(touch.clientX, touch.clientY);
   };
