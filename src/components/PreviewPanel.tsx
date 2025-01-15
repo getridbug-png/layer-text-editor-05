@@ -41,7 +41,8 @@ export const PreviewPanel = ({
       const bgImage = new Image();
       const fgImage = new Image();
 
-      bgImage.setAttribute('rendering', 'crisp-edges');setAttribute('rendering', 'crisp-edges');
+      bgImage.setAttribute('rendering', 'crisp-edges');
+      fgImage.setAttribute('rendering', 'crisp-edges');
 
       bgImage.src = originalImage;
       fgImage.src = processedImage;
