@@ -24,7 +24,7 @@ export const TextControls = ({
   show
 }: TextControlsProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const [color, setColor] = useState("#000000");
+  const [color, setColor] = useState("#FF5733");
 
   const fonts = [
     "Abril Fatface", "Alegreya", "Archivo", "Bitter", "Cabin",
@@ -85,9 +85,9 @@ export const TextControls = ({
         <Label className="text-sm font-medium text-gray-700">Font Size</Label>
         <div className="px-2">
           <Slider
-            defaultValue={[24]}
-            max={200}
-            min={12}
+            defaultValue={[50]}
+            max={800}
+            min={30}
             step={1}
             className="my-4"
             onValueChange={(value) => onSizeChange(value[0])}

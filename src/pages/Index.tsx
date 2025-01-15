@@ -78,10 +78,10 @@ const Index = () => {
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [text, setText] = useState("Your Text Here");
   const [font, setFont] = useState("Arial");
-  const [fontSize, setFontSize] = useState(24);
+  const [fontSize, setFontSize] = useState(40);
   const [fontWeight, setFontWeight] = useState(400);
-  const [color, setColor] = useState("#000000");
-  const [textPosition, setTextPosition] = useState({ x: 100, y: 100 });
+  const [color, setColor] = useState("#FF5733");
+  const [textPosition, setTextPosition] = useState({ x: 150, y: 250 });
   const { toast } = useToast();
 
   const handleImageProcess = (original: string, processed: string) => {
@@ -124,8 +124,8 @@ const Index = () => {
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto py-4 px-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-geist">
-              Text Behind Photos AI
+            <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-crimson">
+              Text Behind Image
             </h1>
             <nav className="flex items-center space-x-6 font-montserrat">
               <a href="#how-it-works" className="text-gray-600 hover:text-primary transition-colors hidden md:block">
@@ -240,7 +240,7 @@ const Index = () => {
                 <span className="font-space">3</span>
               </div>
               <h3 className="text-2xl font-semibold mb-4 font-quicksand bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-                Export & Share
+                Export & Download
               </h3>
               <p className="text-gray-600 font-space">
                 Download your creation in high quality, ready to share on social media or use in your creative projects.
@@ -254,19 +254,19 @@ const Index = () => {
       <section className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-abril font-bold text-center mb-12 text-white">
-            Kaushik Pithiya D
+            Trending Text Behind Photos Gallery
           </h2>
           <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
-            Explore our gallery of creative text-behind-image designs. Get inspired by these examples and create your own unique compositions.
+            Explore our gallery of creative text behind image designs. Get inspired by these examples and create your own unique compositions.
           </p>
           <ExampleGallery />
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section id="blog" className="py-20">
+     {/* Blog Section */}
+ {/*      <section id="blog" className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-montserrat bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 font-abril bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
             Latest from Our Blog
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -307,14 +307,14 @@ const Index = () => {
             </motion.article>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-4 font-geist">Text Behind Photos</h3>
+              <h3 className="text-xl md:text-2xl font-bold mb-4 font-geist">Text Behind Image</h3>
               <p className="text-gray-400">
                 Create stunning visuals by placing text behind objects in your images.
                 Perfect for social media, marketing, and creative projects.
@@ -356,7 +356,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row md:justify-between items-center text-gray-400 text-sm">
-            <p>© 2024 Text Behind Photos. All rights reserved.</p>
+            <p>© 2025 Text Behind Image AI</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Disclaimer</a>

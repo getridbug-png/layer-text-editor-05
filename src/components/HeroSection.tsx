@@ -33,12 +33,9 @@ export const HeroSection = () => {
             </div>
             <h1 className="text-5xl md:text-7xl font-bold font-abril leading-tight">
               <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-                AI-Powered Text
+                AI-Powered Text Behind Image Magic
               </span>
               <br />
-              <span className="bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent">
-                Behind Image Magic
-              </span>
             </h1>
           </motion.div>
 
