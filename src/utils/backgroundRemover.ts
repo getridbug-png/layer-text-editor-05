@@ -1,3 +1,5 @@
+import { removeBackground as removeBg } from '@imgly/background-removal';
+
 export const removeBackground = async (imageElement: HTMLImageElement): Promise<Blob> => {
   try {
     const canvas = document.createElement('canvas');
@@ -8,23 +10,22 @@ export const removeBackground = async (imageElement: HTMLImageElement): Promise<
     canvas.height = imageElement.naturalHeight;
     ctx.drawImage(imageElement, 0, 0);
 
-    const blob = await new Promise<Blob>((resolve) => canvas.toBlob(blob => resolve(blob!), 'image/png'));
-    const formData = new FormData();
-    formData.append('image_file', blob);
+    // Convert canvas to blob
+    const blob = await new Promise<Blob>((resolve) => 
+      canvas.toBlob(blob => resolve(blob!), 'image/png')
+    );
 
-    const response = await fetch('https://api.remove.bg/v1.0/removebg', {
-      method: 'POST',
-      headers: {
-        'X-Api-Key': 'XqEVN4RfVWCkKGcomiFd4c9L',
-      },
-      body: formData,
+    // Convert blob to base64
+    const base64 = await new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.readAsDataURL(blob);
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to remove background');
-    }
+    // Remove background using @imgly/background-removal
+    const resultBlob = await removeBg(base64);
+    return resultBlob;
 
-    return await response.blob();
   } catch (error) {
     console.error('Error removing background:', error);
     throw error;
