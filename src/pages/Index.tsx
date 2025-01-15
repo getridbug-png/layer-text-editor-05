@@ -125,7 +125,7 @@ const Index = () => {
         <div className="container mx-auto py-4 px-4">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-geist">
-              Text Behind Photos
+              Text Behind Photos AI
             </h1>
             <nav className="flex items-center space-x-6 font-montserrat">
               <a href="#how-it-works" className="text-gray-600 hover:text-primary transition-colors hidden md:block">
