@@ -22,17 +22,10 @@ export const removeBackground = async (imageElement: HTMLImageElement): Promise<
       reader.readAsDataURL(blob);
     });
 
-    // Use optimized settings for background removal
-    const resultBlob = await removeBg(base64, {
-      progress: (key: string, current: number, total: number) => {
-        console.log(`Processing: ${key} ${Math.round((current / total) * 100)}%`);
-      },
-      debug: false,
-      publicPath: '/assets/',
-      proxyToWorker: true
-    });
-    
+    // Remove background using @imgly/background-removal
+    const resultBlob = await removeBg(base64);
     return resultBlob;
+
   } catch (error) {
     console.error('Error removing background:', error);
     throw error;
