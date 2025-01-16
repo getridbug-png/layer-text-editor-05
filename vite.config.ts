@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import puppeteer from 'puppeteer'
-import prerenderer from '@prerenderer/prerenderer'
+import { Prerenderer } from '@prerenderer/prerenderer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,25 +15,34 @@ export default defineConfig({
     {
       name: 'prerender',
       async writeBundle() {
-        const browser = await puppeteer.launch({ headless: 'new' })
-        const renderer = new prerenderer.Renderer({
-          renderAfterDocumentEvent: 'render-event',
-          renderer: {
-            implementation: browser,
-            renderAfterTime: 5000
-          }
-        })
+        // Launch puppeteer with specific args to avoid dependency issues
+        const browser = await puppeteer.launch({
+          headless: true,
+          args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage'
+          ]
+        });
 
-        const prerenderInstance = new prerenderer.Prerenderer({
+        // Create prerenderer instance
+        const prerenderer = new Prerenderer({
           staticDir: path.join(__dirname, 'dist'),
-          renderer
-        })
+          renderer: {
+            implementation: 'puppeteer',
+            renderAfterTime: 5000,
+            options: {
+              browser,
+              maxConcurrentRoutes: 4
+            }
+          }
+        });
 
         try {
-          await prerenderInstance.initialize()
-          await prerenderInstance.renderRoutes(['/', '/privacy'])
+          await prerenderer.initialize()
+          await prerenderer.renderRoutes(['/', '/privacy'])
         } finally {
-          await prerenderInstance.destroy()
+          await prerenderer.destroy()
           await browser.close()
         }
       }
