@@ -29,8 +29,7 @@ export const removeBackground = async (imageElement: HTMLImageElement): Promise<
       },
       debug: false,
       publicPath: '/assets/',
-      proxyToWorker: true,
-      skipScaling: true
+      proxyToWorker: true
     });
     
     return resultBlob;
